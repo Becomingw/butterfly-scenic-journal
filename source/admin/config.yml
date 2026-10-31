@@ -1,0 +1,60 @@
+backend:
+  name: gitea
+  repo: your-username/your-blog
+  branch: main
+  app_id: REPLACE_WITH_YOUR_GITEA_OAUTH_CLIENT_ID
+  api_root: https://git.example.com/api/v1
+  base_url: https://git.example.com
+
+site_url: https://example.com
+media_folder: source/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: media
+    label: 影视手记
+    label_singular: 影视手记
+    description: 每部作品单独记录，评分与基本信息直接展示，观后感默认折叠。保存后由 Gitea Actions 自动发布。
+    folder: content/media
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} · {{kind}} · {{rating}} / 5"
+    sortable_fields: [title, watched_on, rating]
+    view_filters:
+      - { label: 已看, field: status, pattern: 已看 }
+      - { label: 在看, field: status, pattern: 在看 }
+      - { label: 想看, field: status, pattern: 想看 }
+    fields:
+      - { label: 作品名称, name: title, widget: string }
+      - { label: 原名 / 外文名, name: original_title, widget: string, required: false }
+      - { label: 作品类型, name: kind, widget: select, options: [电影, 剧集, 动画, 纪录片, 综艺, 其他], default: 电影 }
+      - { label: 上映 / 首播年份, name: release_year, widget: number, value_type: int, min: 1888, max: 2200, required: false }
+      - { label: 国家 / 地区, name: region, widget: string, required: false }
+      - { label: 题材标签, name: genres, widget: list, required: false, hint: 如剧情、喜剧、悬疑 }
+      - { label: 导演, name: director, widget: string, required: false }
+      - { label: 主演, name: cast, widget: string, required: false }
+      - { label: 海报 / 剧照, name: poster, widget: image, required: false, hint: 可上传图片或填写图片地址 }
+      - { label: 观看状态, name: status, widget: select, options: [已看, 在看, 想看], default: 已看 }
+      - { label: 观看日期, name: watched_on, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false, required: false }
+      - { label: 我的评分（满分 5 星）, name: rating, widget: number, value_type: float, min: 0, max: 5, step: 0.5, required: false, hint: 支持半星；留空表示暂未评分 }
+      - { label: 评分补充, name: rating_note, widget: string, required: false, hint: 可补充重看感受或特殊加分原因 }
+      - { label: 作品资料链接, name: link, widget: string, required: false, hint: 可填写豆瓣、IMDb 或官方网站 }
+      - { label: 公开展示, name: published, widget: boolean, default: true, hint: 关闭后仅保存在仓库，不在前台展示 }
+      - { label: 观后感（默认折叠）, name: body, widget: markdown, required: false, hint: 可以先只记评分，之后再补长评 }
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: source/_posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 日期, name: date, widget: datetime, format: "YYYY-MM-DD HH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+      - { label: 摘要, name: summary, widget: text, required: false }
+      - { label: 标签, name: tags, widget: list, required: false }
+      - { label: 分类, name: categories, widget: list, required: false }
+      - { label: 正文, name: body, widget: markdown }

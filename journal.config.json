@@ -1,0 +1,6 @@
+{
+  "githubOwner": "your-username",
+  "music": {
+    "playlistUrl": "/music-playlist.json"
+  }
+}

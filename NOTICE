@@ -1,0 +1,39 @@
+Butterfly Scenic Journal
+Copyright 2026 Becomingw and contributors
+https://github.com/Becomingw/butterfly-scenic-journal
+
+Original customization code, documentation, fictional examples and artwork in
+source/img/ are licensed under Apache License 2.0 (LICENSE).
+source/img/journal-landscape.webp is a rasterization of source/img/landscape.svg.
+The original personal site's mountain image, photos, movie posters, fonts,
+articles, reviews and account snapshots are not distributed in this starter.
+
+UPSTREAM COMPONENTS
+
+Butterfly 5.7.0 — Jerry / jerryc127 and contributors
+https://github.com/jerryc127/hexo-theme-butterfly
+Apache-2.0; installed through npm, not copied into this source repository.
+scripts/journal.js derives a search script at build time from Butterfly's
+source/js/search/local-search.js. The only modification replaces its window
+load listener with a DOMContentLoaded listener. Generated distributions must
+retain the upstream license and this notice.
+
+Hexo 7.3.0 — Hexo contributors
+https://github.com/hexojs/hexo
+MIT; installed through npm. Individual plugins retain their own licenses.
+
+APlayer — DIYgod and contributors
+https://github.com/DIYgod/APlayer
+Bundled files: source/vendor/aplayer/APlayer.min.js and APlayer.min.css.
+MIT license and attribution retained in source/vendor/aplayer/LICENSE.
+
+Decap CMS 3.17.3 — Decap CMS contributors
+https://github.com/decaporg/decap-cms
+MIT; loaded from a versioned CDN only when visiting /admin/.
+
+Butterfly also loads third-party browser libraries via its configured CDN.
+Those components retain their respective licenses. Dependency licensing is
+not replaced by the license for this customization.
+
+Visual inspiration: Butterfly, Fomalhaut, and Zhang Hong Heo's personal blogs.
+No claim of affiliation or endorsement is made.

@@ -1,0 +1,289 @@
+# Scenic Journal — durable overrides for Butterfly 5.7.
+nav:
+  display_title: true
+  fixed: true
+
+menu:
+  首页: "/ || fas fa-home"
+  "文章||fas fa-book-open":
+    探索文章: "/explore/ || fas fa-compass"
+    时间归档: "/archives/ || fas fa-box-archive"
+    分类: "/categories/ || fas fa-folder-open"
+    标签: "/tags/ || fas fa-tags"
+    文章历程: "/journey/ || fas fa-chart-line"
+  "生活||fas fa-mug-hot":
+    追番清单: "/bangumis/ || fas fa-tv"
+    影视手记: "/movies/ || fas fa-film"
+    音乐角落: "/music/ || fas fa-music"
+  "更多||fas fa-ellipsis-h":
+    开源项目: "/projects/ || fas fa-code"
+    友情链接: "/link/ || fas fa-link"
+  关于: "/me/ || fas fa-user"
+
+social:
+  fas fa-rss: "/atom.xml || RSS 订阅 || #278577"
+  fab fa-github: "https://github.com/your-username || GitHub || #24292e"
+
+favicon: /img/avatar.svg
+avatar:
+  img: /img/avatar.svg
+  effect: false
+
+disable_top_img: true
+default_top_img: /img/journal-landscape.webp
+footer_img: false
+background: "#f5f6f3"
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  default_cover: /img/journal-landscape.webp
+
+error_img:
+  flink: /img/avatar.svg
+  post_page: /img/screen-placeholder.svg
+
+error_404:
+  enable: true
+  subtitle: 页面走丢了
+  background: /img/journal-landscape.webp
+
+subtitle:
+  enable: false
+  effect: false
+  source: false
+  sub:
+    - 日子走过，文字留下。
+    - I wish you to become your own sun, no need to rely on who's light.
+
+index_layout: 4
+index_post_content:
+  method: 2
+  length: 120
+
+noticeOutdate:
+  enable: true
+  style: flat
+  limit_day: 365
+  position: top
+  message_prev: 距离上次更新已经
+  message_next: 天，文章内容可能已经过时。
+
+footer:
+  nav:
+    - content:
+        - title: 内容
+          item:
+            - html: '<a href="/explore/">探索文章</a>'
+            - html: '<a href="/journey/">文章历程</a>'
+            - html: '<a href="/projects/">开源项目</a>'
+    - content:
+        - title: 生活
+          item:
+            - html: '<a href="/bangumis/">追番清单</a>'
+            - html: '<a href="/movies/">影视手记</a>'
+            - html: '<a href="/music/">音乐角落</a>'
+    - content:
+        - title: 连接
+          item:
+            - html: '<a href="/me/">关于作者</a>'
+            - html: '<a href="/link/">友情链接</a>'
+  owner:
+    enable: true
+    since: 2026
+  copyright:
+    enable: true
+    version: false
+  custom_text: '日子走过，文字留下。'
+
+aside:
+  enable: true
+  mobile: false
+  position: right
+  card_author:
+    enable: true
+    description: 记录生活，分享喜欢的东西，偶尔折腾一点新玩意。
+    button:
+      enable: true
+      icon: fab fa-github
+      text: GitHub
+      link: https://github.com/your-username
+  card_announcement:
+    enable: true
+    content: '欢迎来到我的数字手记。<br>按 <kbd>⌘ / Ctrl K</kbd> 搜索全文，或去 <a href="/explore/">探索文章</a>。<br><a href="/journey/">看看一路写下了什么 →</a>'
+  card_recent_post:
+    enable: true
+    limit: 5
+  card_categories:
+    enable: true
+    limit: 6
+    expand: false
+  card_tags:
+    enable: true
+    limit: 16
+    orderby: length
+    order: -1
+  card_archives:
+    enable: true
+    type: yearly
+    format: YYYY年
+    order: -1
+    limit: 5
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    runtime_date: 2026/01/01 00:00:00
+
+translate:
+  enable: true
+  default: 繁
+  defaultEncoding: 2
+
+post_copyright:
+  enable: true
+  license: Apache-2.0 (example content)
+  license_url: https://www.apache.org/licenses/LICENSE-2.0
+
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+busuanzi:
+  site_uv: false
+  site_pv: false
+  page_pv: false
+
+search:
+  use: local_search
+  placeholder: 搜索标题与正文…
+  local_search:
+    preload: false
+    top_n_per_article: 1
+    unescape: true
+    pagination:
+      enable: true
+      hitsPerPage: 8
+
+comments:
+  use:
+  text: true
+  lazyload: true
+  count: false
+
+mask:
+  header: false
+  footer: false
+
+preloader:
+  enable: false
+  source: 1
+
+display_mode: light
+rounded_corners_ui: true
+
+activate_power_mode:
+  enable: false
+  colorful: true
+  shake: true
+  mobile: false
+
+fireworks:
+  enable: false
+  mobile: false
+
+lightbox: fancybox
+
+pjax:
+  enable: true
+
+snackbar:
+  enable: true
+  position: bottom-left
+  bg_light: "#158b86"
+  bg_dark: "#2c3239"
+
+lazyload:
+  enable: true
+  native: true
+  field: site
+
+inject:
+  head:
+    - <link rel="stylesheet" href="/css/journal.css?v=20261101b">
+    - <link rel="stylesheet" href="/css/scenic.css?v=20261101c">
+    - <link rel="stylesheet" href="/css/screen-diary.css?v=20261101c">
+    - <link rel="stylesheet" href="/css/music-list.css?v=20261101d">
+    - <link rel="stylesheet" href="/css/life-pages.css?v=20261101e">
+    - <link rel="alternate" type="application/atom+xml" title="Scenic Journal" href="/atom.xml">
+    - <script src="/js/journal-settings.js"></script>
+  bottom:
+    - <script src="/js/journal.js?v=20261101e" defer></script>
+    - <script src="/js/journey.js?v=20261101e" defer></script>
+    - <script src="/js/screen-diary.js?v=20261101c" defer></script>
+
+CDN:
+  option:
+    local_search: /js/journal-search.js?v=20261101a
+
+theme_color:
+  enable: true
+  main: "#158b86"
+  paginator: "#158b86"
+  button_hover: "#11736f"
+  text_selection: "#c6efeb"
+  link_color: "#158b86"
+  meta_color: "#687580"
+  toc_color: "#158b86"
+  scrollbar_color: "#97b5ba"
+  meta_theme_color_light: "#f4f6f8"
+  meta_theme_color_dark: "#1a1d22"
+font:
+  global_font_size: 15px
+  code_font_size: 14px
+  font_family: '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif'
+  code_font_family: '"SFMono-Regular", Consolas, "Liberation Mono", monospace'
+code_blocks:
+  theme: light
+  macStyle: true
+  height_limit: 480
+  copy: true
+  language: true
+  shrink: false
+  fullpage: true
+toc:
+  post: true
+  page: true
+  number: false
+  expand: false
+  scroll_percent: true
+related_post:
+  enable: true
+  limit: 4
+readmode: true
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: 1
+rightside_scroll_percent: true
+anchor:
+  auto_update: false
+  click_to_scroll: true
+share:
+  use: false
+structured_data:
+  enable: true
+math:
+  use: mathjax
+  per_page: false
+mermaid:
+  enable: true
+  code_write: true
+  theme:
+    light: neutral
+    dark: dark
+  zoom_pan: true
+  open_in_new_tab: true

@@ -1,0 +1,12 @@
+/* Music corner: direct song list, sharing the persistent site player. */
+#journal-music-list{margin-top:24px}
+#article-container #journal-music-list ol{list-style:none;padding:0;margin:0}
+#article-container #journal-music-list li{margin:0;padding:0;list-style:none}
+.j-track-head,.j-track{display:grid;grid-template-columns:36px minmax(0,1.6fr) minmax(0,1fr) 24px;gap:18px;align-items:center;padding:16px 18px}
+.j-track-head{color:var(--j-muted);font-size:.8rem;border-bottom:1px solid var(--j-line)}
+.j-track{width:100%;border:0;border-bottom:1px solid var(--j-line);background:transparent;color:var(--j-ink);text-align:left;line-height:1.6;transition:background .2s}
+.j-track:hover,.j-track:focus-visible{background:var(--j-soft)}
+.j-track.is-active{color:var(--j-accent);background:var(--j-soft)}
+.j-track-number,.j-track-artist{color:var(--j-muted);font-size:.85rem}.j-track-number{font-variant-numeric:tabular-nums}
+.j-track-name,.j-track-artist{overflow-wrap:anywhere;min-width:0}.j-track-state{color:var(--j-accent);text-align:center;font-size:.8rem}
+@media(max-width:600px){.j-track-head{display:none}.j-track{grid-template-columns:26px minmax(0,1fr) 20px;gap:2px 12px;padding:14px 4px}.j-track-number{grid-row:1/3}.j-track-name{grid-column:2}.j-track-artist{grid-column:2;grid-row:2}.j-track-state{grid-column:3;grid-row:1/3}}
