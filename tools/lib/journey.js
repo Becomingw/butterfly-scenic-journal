@@ -9,7 +9,7 @@ function measure(html) {
   return { words:han+words, images:(clean.match(/<img\b/gi)||[]).length };
 }
 function aggregate(posts, today) {
-  const sorted=posts.slice().sort((a,b)=>a.date.localeCompare(b.date)||a.url.localeCompare(b.url));
+  const sorted=posts.slice().sort((a,b)=>a.date.localeCompare(b.date)||(a.timestamp??0)-(b.timestamp??0)||a.url.localeCompare(b.url));
   const days=Object.create(null), months=Object.create(null), tags=Object.create(null), categories=Object.create(null), weekdays=Array(7).fill(0), lengths=Array(4).fill(0);
   for(const p of sorted){
     (days[p.date] ||= []).push(p);months[p.date.slice(0,7)]=(months[p.date.slice(0,7)]||0)+1;
@@ -26,4 +26,13 @@ function aggregate(posts, today) {
   const totalWords=sorted.reduce((n,p)=>n+p.words,0);
   return {posts:sorted,days,years,weekdays,lengths,tags:rank(tags),categories:rank(categories),months:rank(months),totalWords,images:sorted.reduce((n,p)=>n+p.images,0),activeDays:dates.length,spanDays:sorted.length?Math.max(1,dayNumber(today)-dayNumber(sorted[0].date)+1):0,longestStreak,streakEnd,first:sorted[0]||null,latest:sorted.at(-1)||null,longest:sorted.slice().sort((a,b)=>b.words-a.words||a.date.localeCompare(b.date))[0]||null,median:sorted.length?(()=>{const w=sorted.map(p=>p.words).sort((a,b)=>a-b);const i=Math.floor(w.length/2);return w.length%2?w[i]:(w[i-1]+w[i])/2;})():0};
 }
-module.exports={measure,aggregate};
+function momentRecords(entries, renderMarkdown) {
+  return entries.map(entry=>{
+    const html=renderMarkdown(entry.body),measured=measure(html);
+    const excerpt=unescapeHTML(stripHTML(html)).replace(/\s+/g,' ').trim();
+    return {title:excerpt?excerpt.slice(0,64)+(excerpt.length>64?'…':''):(entry.images.length?'一组日常配图':'一段日子的配乐'),
+      url:'/moments/#'+encodeURIComponent(entry.id),date:entry.displayDate.slice(0,10),timestamp:entry.timestamp,
+      words:measured.words,images:measured.images+entry.images.length,tags:[],categories:[]};
+  });
+}
+module.exports={measure,aggregate,momentRecords};

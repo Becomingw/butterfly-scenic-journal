@@ -16,6 +16,7 @@ menu:
     影视手记: "/movies/ || fas fa-film"
     音乐角落: "/music/ || fas fa-music"
   "更多||fas fa-ellipsis-h":
+    碎碎念: "/moments/ || fas fa-feather-pointed"
     开源项目: "/projects/ || fas fa-code"
     友情链接: "/link/ || fas fa-link"
   关于: "/me/ || fas fa-user"
@@ -84,6 +85,7 @@ footer:
             - html: '<a href="/bangumis/">追番清单</a>'
             - html: '<a href="/movies/">影视手记</a>'
             - html: '<a href="/music/">音乐角落</a>'
+            - html: '<a href="/moments/">碎碎念</a>'
     - content:
         - title: 连接
           item:
@@ -217,12 +219,14 @@ inject:
     - <link rel="stylesheet" href="/css/scenic.css?v=20261101c">
     - <link rel="stylesheet" href="/css/screen-diary.css?v=20261101c">
     - <link rel="stylesheet" href="/css/music-list.css?v=20261101d">
-    - <link rel="stylesheet" href="/css/life-pages.css?v=20261101e">
+    - <link rel="stylesheet" href="/css/life-pages.css?v=20261101j">
+    - <link rel="stylesheet" href="/css/moments.css?v=20261101h">
     - <link rel="alternate" type="application/atom+xml" title="Scenic Journal" href="/atom.xml">
     - <script src="/js/journal-settings.js"></script>
   bottom:
     - <script src="/js/journal.js?v=20261101e" defer></script>
-    - <script src="/js/journey.js?v=20261101e" defer></script>
+    - <script src="/js/journey.js?v=20261101j" defer></script>
+    - <script src="/js/moments.js?v=20261101h" defer></script>
     - <script src="/js/screen-diary.js?v=20261101c" defer></script>
 
 CDN:

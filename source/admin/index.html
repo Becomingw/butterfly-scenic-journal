@@ -4,16 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>博客管理</title>
-    <style>
-      .admin-shortcuts{position:fixed;right:16px;bottom:16px;z-index:999;display:flex;gap:8px;flex-wrap:wrap;font:13px/1.5 system-ui,sans-serif}
-      .admin-shortcuts a{padding:9px 13px;border:1px solid #dbe5df;border-radius:8px;background:#fff;color:#24786b;text-decoration:none;box-shadow:0 3px 12px #0001}
-      .admin-shortcuts a:first-child{background:#24786b;color:#fff}
-      .admin-shortcuts a:focus-visible{outline:3px solid #24786b;outline-offset:3px}
-    </style>
   </head>
   <body>
-    <nav class="admin-shortcuts" aria-label="管理快捷入口"><a href="#/collections/media/new">＋ 新增影视手记</a><a href="/movies/" target="_blank" rel="noopener">查看影视手记 ↗</a><a href="/admin/guide.html" target="_blank" rel="noopener">使用说明</a></nav>
+    <!-- Decap shows collection navigation after login. Repository permissions
+         enforce authorization; hiding links is not an access-control mechanism. -->
     <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
-    <script src="/admin/screen-preview.js?v=20261101c"></script>
+    <script src="/admin/screen-preview.js?v=20261101k"></script>
   </body>
 </html>

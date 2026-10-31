@@ -1,7 +1,7 @@
 {
   "name": "butterfly-scenic-journal",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A scenic, life-first Hexo / Butterfly starter with a writing journey and film diary",
   "license": "Apache-2.0",
   "engines": { "node": "22.x", "npm": "10.x" },
@@ -12,7 +12,7 @@
     "build": "hexo clean && hexo generate",
     "server": "hexo server",
     "refresh:projects": "node tools/refresh-projects.js",
-    "check": "node tools/check-site.js && node tools/check-screen-diary.js && node tools/check-journey.js"
+    "check": "node tools/check-site.js && node tools/check-screen-diary.js && node tools/check-journey.js && node tools/check-moments.js"
   },
   "dependencies": {
     "hexo": "7.3.0",

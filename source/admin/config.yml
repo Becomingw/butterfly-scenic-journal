@@ -11,6 +11,36 @@ media_folder: source/images/uploads
 public_folder: /images/uploads
 
 collections:
+  - name: moments
+    label: 碎碎念
+    label_singular: 碎碎念
+    description: 记录不必写成长文的日常，发布后展示在“更多 → 碎碎念”，并自动加入文章历程统计。
+    folder: content/moments
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}-{{slug}}"
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title, author]
+    view_filters:
+      - { label: 已公开, field: published, pattern: "true" }
+      - { label: 未公开, field: published, pattern: "false" }
+    fields:
+      - { label: 一句话备注, name: title, widget: string, hint: 仅用于后台列表和文件名，前台展示正文。 }
+      - { label: 发布时间, name: date, widget: datetime, format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: 保留时区；未来时间将在到期后的构建中公开。 }
+      - { label: 作者显示名, name: author, widget: string, required: false, hint: 留空使用站点作者。 }
+      - { label: 头像, name: avatar, widget: image, required: false, hint: 留空使用博客默认头像。 }
+      - { label: 内容, name: body, widget: markdown, required: false, hint: 内容、配图和配乐至少填写一项。 }
+      - label: 配图
+        name: images
+        widget: list
+        required: false
+        summary: "{{fields.alt}}"
+        fields:
+          - { label: 图片, name: url, widget: image }
+          - { label: 图片说明, name: alt, widget: string, required: false }
+      - { label: 配乐链接, name: music_url, widget: string, required: false, hint: 网易云 HTTPS 外链播放器会内嵌显示且不自动播放，其他链接显示为跳转链接。 }
+      - { label: 公开展示, name: published, widget: boolean, default: true }
   - name: media
     label: 影视手记
     label_singular: 影视手记
@@ -55,6 +85,7 @@ collections:
       - { label: 标题, name: title, widget: string }
       - { label: 日期, name: date, widget: datetime, format: "YYYY-MM-DD HH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
       - { label: 摘要, name: summary, widget: text, required: false }
+      - { label: 文章封面, name: cover, widget: image, required: false, hint: 用于首页和归档卡片，建议使用 16∶9 横图；留空使用站点默认图。 }
       - { label: 标签, name: tags, widget: list, required: false }
       - { label: 分类, name: categories, widget: list, required: false }
       - { label: 正文, name: body, widget: markdown }

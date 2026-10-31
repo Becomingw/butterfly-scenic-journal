@@ -1,1 +1,16 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>影视手记管理说明</title><style>body{max-width:720px;margin:48px auto;padding:0 22px;background:#f5f6f3;color:#263b34;font:16px/1.9 system-ui,sans-serif}a{color:#24786b}h1{font-size:1.8rem}li{margin:10px 0}code{background:#e9eeea;padding:2px 5px;border-radius:4px}</style><h1>添加一篇影视手记</h1><ol><li><a href="/admin/#/collections/media/new">打开“新增影视手记”</a>，使用已有 Gitea 账号登录。</li><li>填作品名称、类型、观看状态；可上传海报，补充年份、导演、主演与资料链接。</li><li>评分满分 5 星，支持 0.5 分。没有评分时留空；额外感受可以写在“评分补充”。</li><li>长评写在“观后感”中，支持 Markdown。前台默认折叠，读者点击后展开。</li><li>点击后台“发布”，记录提交到仓库；等待 Gitea Actions 构建成功后刷新 <a href="/movies/">影视手记页</a>。关闭“公开展示”可先保存不公开的记录。</li></ol><p>每条手记保存在 <code>content/media/*.md</code>。上传的海报保存在 <code>source/images/uploads</code>。无需手改页面代码，也不需要手动部署。</p><p><a href="/admin/#/collections/media">管理已有手记 →</a></p></html>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>博客后台使用说明</title>
+<style>body{max-width:720px;margin:48px auto;padding:0 22px;background:#f5f6f3;color:#263b34;font:16px/1.9 system-ui,sans-serif}a{color:#24786b}h1{font-size:1.8rem}li{margin:10px 0}code{background:#e9eeea;padding:2px 5px;border-radius:4px}</style>
+</head><body>
+<h1>博客后台使用说明</h1>
+<p>先按照仓库的配置指南设置 Decap backend、OAuth 和发布流水线，再<a href="/admin/">登录后台</a>。只有拥有源码仓库写权限的账号可以编辑；注册账号不等于获得仓库权限。后台菜单由 Decap 在登录后提供。</p>
+<h2>管理碎碎念</h2>
+<ol><li>选择“碎碎念”，新增或编辑记录；“一句话备注”用于后台列表，前台直接展示正文。</li><li>填写发布时间，或点击 Now。可添加文字、多张配图和图片说明，至少填写正文、配图或配乐中的一项。</li><li>作者与头像留空时使用站点设置。预览时间使用浏览器时区，前台使用站点时区。</li><li>关闭“公开展示”保存不公开的记录；未来时间的记录在到期后的构建中展示。</li><li>点击发布，等待流水线完成。内容出现在“更多 → 碎碎念”，文章历程同步更新相关统计。</li></ol>
+<p>每条碎碎念保存在 <code>content/moments/*.md</code>。在后台删除后，下一次构建将移除对应内容。</p>
+<h2>管理影视手记</h2>
+<ol><li>选择“影视手记”，填写作品名称、类型和观看状态。</li><li>可上传海报，补充导演、主演、年份和资料链接。</li><li>评分满分 5 星，支持半星；没有评分时留空。</li><li>“观后感”支持 Markdown，前台默认折叠。关闭“公开展示”可保存不公开的记录。</li></ol>
+<h2>文章封面</h2>
+<p>选择“文章”，在“文章封面”上传图片、选择媒体或填写图片 URL。右侧预览显示封面；封面用于首页、归档和相关推荐，建议使用 16∶9 横图。留空时使用站点默认图片。</p>
+<p>影视手记位于 <code>content/media/</code>，文章位于 <code>source/_posts/</code>，上传图片位于 <code>source/images/uploads/</code>。</p>
+</body></html>

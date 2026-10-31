@@ -2,11 +2,19 @@ Butterfly Scenic Journal
 Copyright 2026 Becomingw and contributors
 https://github.com/Becomingw/butterfly-scenic-journal
 
-Original customization code, documentation, fictional examples and artwork in
-source/img/ are licensed under Apache License 2.0 (LICENSE).
-source/img/journal-landscape.webp is a rasterization of source/img/landscape.svg.
-The original personal site's mountain image, photos, movie posters, fonts,
-articles, reviews and account snapshots are not distributed in this starter.
+Original customization code, documentation, fictional examples and original SVG
+artwork in source/img/ are licensed under Apache License 2.0 (LICENSE).
+
+BLOG DEMONSTRATION ASSETS (v1.1.0)
+source/img/journal-landscape.webp is the mountain image used by Becomingw Blog,
+https://hexo.scosine.org/img/journal-landscape.webp, copied with the site owner's
+permission. docs/screenshots/ shows that site's actual public interface, including
+its displayed content and imagery. These demonstration assets retain the rights
+of their respective creators and are not relicensed under Apache-2.0. See
+docs/ASSETS.md for origins and checksum. The original v1.0.0 landscape.svg remains
+available as an alternative and is no longer the source of the default WebP.
+Editable articles, reviews and moments are fictional examples; production account
+settings, music files and private infrastructure configuration are not included.
 
 UPSTREAM COMPONENTS
 
