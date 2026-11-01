@@ -8,6 +8,8 @@
 
 默认山景 `source/img/journal-landscape.webp` 使用 Becomingw Blog 同款图片，[来源记录](ASSETS.md)。`source/img/landscape.svg` 保留 v1.0.0 的原创替代图，两者不再是同一张图。可替换默认图片并保留文件名；头像为 `avatar.svg`。文章 front matter 的 `cover` 可覆盖单篇文章封面，后台也可直接选择图片。
 
+首页导航浮在主图上，默认透明；桌面端停留片刻后自动隐去，鼠标移到顶部、键盘聚焦或向上滚动时重新出现。滚过主图后恢复实心导航。副标题轮换文案写在 `_config.butterfly.yml` 的 `subtitle.sub`，效果与 Butterfly 的打字切换一致。关闭 JavaScript 或系统开启减少动态效果时，显示第一句。
+
 ## 影视手记
 
 每部作品一个 `content/media/*.md`。参考虚构示例：`title` 必填，评分范围 0–5、步长 0.5，`published: false` 不发布。长评在正文中，初始折叠。图片可用站内路径或 HTTPS。后台与 Markdown 采用同一数据结构。

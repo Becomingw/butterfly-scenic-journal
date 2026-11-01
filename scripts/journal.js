@@ -32,7 +32,11 @@ hexo.extend.generator.register('journal-catalog', function (locals) {
 hexo.extend.filter.register('after_render:html', function (html) {
   // Butterfly's home layout has this container; archive/tag/category use their own UI.
   if (!html.includes('id="recent-posts"')) return html;
-  const hero = `<section class="journal-home journal-home-simple" aria-label="博客简介"><div><h1>${escapeHTML(hexo.config.title)}</h1><p>${escapeHTML(hexo.config.subtitle || '')}</p></div><a class="journal-scroll" href="#recent-posts" aria-label="向下阅读最近的手记"><i class="fas fa-chevron-down" aria-hidden="true"></i></a></section>`;
+  const configured = hexo.theme.config.subtitle?.sub;
+  const lines = [...new Set((Array.isArray(configured) ? configured : [configured, hexo.config.subtitle]).map(line => String(line || '').trim()).filter(Boolean))];
+  const title = String(hexo.config.title || '');
+  const data = JSON.stringify(lines).replace(/</g, '\\u003c');
+  const hero = `<section class="journal-home journal-home-simple" aria-label="博客简介"><div class="journal-hero-bg" aria-hidden="true"><span></span></div><div class="journal-hero-copy"><h1 class="journal-hero-title">${escapeHTML(title)}</h1><p class="journal-hero-subtitle"><button type="button" id="journal-subtitle-next" aria-label="下一句副标题"><span id="journal-subtitle">${escapeHTML(lines[0] || '')}</span><span class="journal-caret" aria-hidden="true"></span></button></p></div><script type="application/json" id="journal-subtitle-data">${data}</script><a class="journal-scroll" href="#recent-posts" aria-label="向下阅读最近的手记"><i class="fas fa-chevron-down" aria-hidden="true"></i></a></section>`;
   html = html.replace('</header>', '</header>' + hero);
   html = html.replace('<div class="recent-post-items">', '<div class="j-section-heading"><h2>最近的手记</h2><a href="/explore/">全部文章 →</a></div><div class="recent-post-items">');
   return html;

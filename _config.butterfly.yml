@@ -50,12 +50,16 @@ error_404:
   subtitle: 页面走丢了
   background: /img/journal-landscape.webp
 
+# Homepage reads sub for Butterfly-style typed rotation. enable stays false so
+# Butterfly does not render a second subtitle in the page header.
 subtitle:
   enable: false
-  effect: false
+  effect: true
   source: false
   sub:
     - 日子走过，文字留下。
+    - 一些不必写成长文的瞬间。
+    - Keep one small note, then let the days arrive.
     - I wish you to become your own sun, no need to rely on who's light.
 
 index_layout: 4
@@ -216,7 +220,7 @@ lazyload:
 inject:
   head:
     - <link rel="stylesheet" href="/css/journal.css?v=20261101b">
-    - <link rel="stylesheet" href="/css/scenic.css?v=20261101c">
+    - <link rel="stylesheet" href="/css/scenic.css?v=20261101m">
     - <link rel="stylesheet" href="/css/screen-diary.css?v=20261101c">
     - <link rel="stylesheet" href="/css/music-list.css?v=20261101d">
     - <link rel="stylesheet" href="/css/life-pages.css?v=20261101j">
@@ -224,7 +228,7 @@ inject:
     - <link rel="alternate" type="application/atom+xml" title="Scenic Journal" href="/atom.xml">
     - <script src="/js/journal-settings.js"></script>
   bottom:
-    - <script src="/js/journal.js?v=20261101e" defer></script>
+    - <script src="/js/journal.js?v=20261101m" defer></script>
     - <script src="/js/journey.js?v=20261101j" defer></script>
     - <script src="/js/moments.js?v=20261101h" defer></script>
     - <script src="/js/screen-diary.js?v=20261101c" defer></script>

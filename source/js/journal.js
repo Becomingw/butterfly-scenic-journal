@@ -150,6 +150,90 @@
     if(!player)return;
     $$('#journal-music-list .j-track').forEach(row=>{const index=Number(row.dataset.index),active=index===player.list.index,playing=active&&!player.audio.paused,track=player.list.audios[index];row.classList.toggle('is-active',active);row.setAttribute('aria-label',`${playing?'暂停':'播放'} ${track.name} · ${track.artist}`);$('.j-track-state',row).textContent=playing?'Ⅱ':'▶';});
   }
+  let heroNavTimer;
+  function revealHeroNav(persist) {
+    const header = $('#page-header');
+    if (!header || !$('.journal-home-simple')) return;
+    header.classList.add('hero-nav-show');
+    clearTimeout(heroNavTimer);
+    if (persist || header.classList.contains('hero-nav-solid') || !document.documentElement.classList.contains('hero-nav-autohide')) return;
+    heroNavTimer = setTimeout(() => {
+      if ($('#nav')?.matches(':hover, :focus-within') || window.scrollY > 64) { revealHeroNav(); return; }
+      header.classList.remove('hero-nav-show');
+    }, 1700);
+  }
+  function syncHeroNav() {
+    const header = $('#page-header');
+    if (!header || !$('.journal-home-simple')) return;
+    const solid = window.scrollY > 64, wasSolid = header.classList.contains('hero-nav-solid');
+    header.classList.toggle('hero-nav-solid', solid);
+    if (solid) header.classList.add('hero-nav-show');
+    else if (wasSolid) revealHeroNav();
+  }
+  function typeLines(node, lines, signal) {
+    let index = 0, count = 0, deleting = false, timer = 0, paused = false;
+    const wait = ms => { clearTimeout(timer); timer = setTimeout(step, ms); };
+    function step() {
+      if (signal.aborted || paused) return;
+      const text = lines[index];
+      if (!deleting) {
+        count = Math.min(text.length, count + 1);
+        node.textContent = text.slice(0, count);
+        if (count === text.length) { deleting = true; wait(1700); }
+        else wait(text.length > 22 ? 58 : 76);
+      } else {
+        count = Math.max(0, count - 1);
+        node.textContent = text.slice(0, count);
+        if (!count) { deleting = false; index = (index + 1) % lines.length; wait(260); }
+        else wait(30);
+      }
+    }
+    const subtitle = node.closest('.journal-hero-subtitle');
+    subtitle?.addEventListener('pointerenter', () => { paused = true; clearTimeout(timer); }, {signal});
+    subtitle?.addEventListener('pointerleave', () => { paused = false; step(); }, {signal});
+    subtitle?.addEventListener('click', () => { index = (index + 1) % lines.length; count = 0; deleting = false; paused = false; step(); }, {signal});
+    signal.addEventListener('abort', () => clearTimeout(timer));
+    wait(480);
+  }
+  function heroStage(signal) {
+    const hero = $('.journal-home-simple'), header = $('#page-header');
+    document.documentElement.classList.remove('hero-nav-autohide');
+    header?.classList.remove('hero-nav-show', 'hero-nav-solid');
+    if (!hero || !header) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (canHover && !reduced) document.documentElement.classList.add('hero-nav-autohide');
+    const title = $('.journal-hero-title', hero);
+    if (title && !reduced && !title.dataset.ready) {
+      const text = title.textContent;
+      title.dataset.ready = '1';
+      title.setAttribute('aria-label', text);
+      title.textContent = '';
+      [...text].forEach((character, index) => {
+        const span = document.createElement('span');
+        span.textContent = character === ' ' ? '\u00a0' : character;
+        span.style.setProperty('--i', index);
+        span.setAttribute('aria-hidden', 'true');
+        title.append(span);
+      });
+    }
+    let lines = [];
+    try { lines = JSON.parse($('#journal-subtitle-data', hero)?.textContent || '[]'); } catch { lines = []; }
+    lines = lines.filter(line => typeof line === 'string' && line.trim());
+    const node = $('#journal-subtitle', hero);
+    if (node && lines.length) {
+      if (reduced || lines.length < 2) { node.textContent = lines[0]; node.nextElementSibling?.remove(); }
+      else typeLines(node, lines, signal);
+    }
+    hero.addEventListener('pointermove', event => {
+      const box = hero.getBoundingClientRect();
+      hero.style.setProperty('--px', ((event.clientX - box.left) / box.width - 0.5).toFixed(3));
+      hero.style.setProperty('--py', ((event.clientY - box.top) / box.height - 0.5).toFixed(3));
+    }, {signal, passive: true});
+    hero.addEventListener('pointerleave', () => { hero.style.setProperty('--px', '0'); hero.style.setProperty('--py', '0'); }, {signal});
+    revealHeroNav();
+    syncHeroNav();
+  }
   function init() {
     pageEvents?.abort();pageEvents=new AbortController();const {signal}=pageEvents;
     // Read-mode body state is outside Butterfly's PJAX replacement containers.
@@ -157,12 +241,14 @@
     if(!$('.j-skip')){const a=document.createElement('a');a.className='j-skip';a.href='#content-inner';a.textContent='跳到正文';document.body.prepend(a);}
     if(!$('.j-theme-toggle')){const b=document.createElement('button');b.className='j-theme-toggle';b.type='button';b.dataset.action='theme';b.title='切换明暗主题';b.setAttribute('aria-label','切换明暗主题');b.textContent='◐';$('#menus')?.append(b);}
     if(!$('.j-reading-progress')){const p=document.createElement('div');p.className='j-reading-progress';p.setAttribute('aria-hidden','true');p.innerHTML='<span></span>';document.body.append(p);}
-    postTools();discovery(signal);bangumi(signal);tagFilter(signal);setupMusic();progress();
+    postTools();discovery(signal);bangumi(signal);tagFilter(signal);setupMusic();progress();heroStage(signal);
     if($('#journal-music-list')){renderMusicList();if(!player)loadMusic();}
     $$('img').forEach(img=>{img.addEventListener('error',()=>{if(!img.dataset.jFallback){img.dataset.jFallback='1';img.src='/img/screen-placeholder.svg';}},{once:true,signal});});
   }
   function progress(){const article=$('#post #article-container'),bar=$('.j-reading-progress span');if(!bar)return;let value=0;if(article){const box=article.getBoundingClientRect();value=Math.max(0,Math.min(1,(100-box.top)/Math.max(1,box.height-innerHeight+120)));}bar.style.transform=`scaleX(${value})`;}
-  let scheduled=false;window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(()=>{progress();scheduled=false;});}},{passive:true});window.addEventListener('resize',progress,{passive:true});
+  let scheduled=false;window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(()=>{progress();syncHeroNav();scheduled=false;});}},{passive:true});window.addEventListener('resize',progress,{passive:true});
+  window.addEventListener('pointermove', event => { if (event.clientY < 72) revealHeroNav(); }, {passive:true});
+  document.addEventListener('focusin', event => { if (event.target.closest?.('#nav')) revealHeroNav(true); });
   document.addEventListener('click',async e=>{
     const control=e.target.closest('[data-action]');if(!control)return;
     const action=control.dataset.action;

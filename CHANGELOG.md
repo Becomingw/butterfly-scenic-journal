@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Overlay a transparent, auto-hiding homepage navigation so the hero image stays unobstructed.
+- Add pointer-reactive title motion and Butterfly-style rotating subtitles from `subtitle.sub`.
+
 ## 1.1.0 — 2026-11-01
 
 - Add a chronological moments page with lightweight search, year buttons, paging, image lightboxes, optional music and PJAX-safe deep links.

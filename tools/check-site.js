@@ -29,6 +29,8 @@ for(const route of ['journey','projects']) {
 assert.equal((read('projects/index.html').match(/class="life-project"/g)||[]).length,JSON.parse(read('github-projects.json')).projects.length);
 assert.ok(read('me/index.html').includes('lang="en"'),'Bilingual about missing');
 assert.ok(home.includes('journal-home-simple'), 'Simple homepage missing');
+assert.ok(home.includes('id="journal-subtitle"') && home.includes('id="journal-subtitle-data"'), 'Rotating subtitle missing');
+assert.ok(read('css/scenic.css').includes('hero-nav-solid'), 'Transparent homepage navigation missing');
 assert.ok(!home.includes('class="journal-hero"'), 'Promotional homepage returned');
 for (const file of ['css/screen-diary.css','js/screen-diary.js','img/screen-placeholder.svg','admin/config.yml','admin/screen-preview.js','admin/guide.html']) assert.ok(read(file).length, `Missing screen diary asset: ${file}`);
 const movies = read('movies/index.html');
